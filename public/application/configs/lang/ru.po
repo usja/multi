@@ -1,0 +1,131 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Андрей <usja@4life.com.ua>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "News"
+msgstr "Новости"
+
+msgid "All news"
+msgstr "Все новости"
+
+msgid "Track & trace EMS"
+msgstr "Отслеживание посылок EMS"
+
+msgid "No data found for:"
+msgstr "Отправление не найдено с кодом:"
+
+msgid "Information for tracking number"
+msgstr "Информация по коду"
+
+msgid "This item was delivered"
+msgstr "Посылка поступила"
+
+msgid " to processing center "
+msgstr " в Центр обработки "
+
+msgid " sent to the customs control."
+msgstr " отправлено на таможенный контроль."
+
+msgid "customs clearance is completed."
+msgstr "таможенное оформление завершено."
+
+msgid "under customs control sent  to customs location of the recipient."
+msgstr "под таможенным контролем направлено на таможню адресата."
+
+msgid "Currently, customs control isn't completed."
+msgstr "Таможенный контроль еще не закончен."
+
+msgid "Your item was served on "
+msgstr "Ваша посылка была вручена "
+
+msgid "Received: "
+msgstr "Получил: "
+
+msgid "Item was returned from Ukraine: "
+msgstr "Посылка была возвращена из Украины:"
+
+msgid "Reason: "
+msgstr "Причина: "
+
+msgid "please, connect with us by our E-Mail"
+msgstr "пожалуйста, свяжитесь с нами с помощью электронной почты"
+
+msgid "addressee's moved."
+msgstr "адресат выбыл."
+
+msgid "incomplete address."
+msgstr "адрес неполный."
+
+msgid "incorrect address."
+msgstr "адрес неверный."
+
+msgid "change of address."
+msgstr "адрес поменялся."
+
+msgid "illegible address."
+msgstr "нечеткий адрес."
+
+msgid "addressee's death."
+msgstr "адресат умер."
+
+msgid "addressee left."
+msgstr "адресат выбыл."
+
+msgid "addressee is unknown."
+msgstr "адресат неизвестен."
+
+msgid "refused."
+msgstr "отказано."
+
+msgid "not claimed."
+msgstr "невостребовано."
+
+msgid "prohibited."
+msgstr "запрещено."
+
+msgid "missent."
+msgstr "неправильная страна назначения."
+
+msgid "damaged."
+msgstr "повреждено."
+
+msgid "by service request."
+msgstr "по запросу почтовой службы."
+
+msgid "service."
+msgstr "служебное."
+
+msgid "other reason."
+msgstr "другая причина."
+
+msgid "previous"
+msgstr "предыдущая"
+
+msgid "next"
+msgstr "следующая"
+
+msgid "view all news"
+msgstr "все новости"
+
+msgid "Destination"
+msgstr "Куда"
+
+msgid "Choose country"
+msgstr "Укажите страну"
+
+msgid "Weight (kg)"
+msgstr "Вес (кг)"
+
+msgid "With taxes"
+msgstr "C НДС"
+
+msgid "State Enterprise of Special Post"
+msgstr "Государственного предприятия специальной связи"
+

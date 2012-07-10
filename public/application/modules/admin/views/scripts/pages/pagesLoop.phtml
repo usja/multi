@@ -1,0 +1,24 @@
+<li id="page_<?= $this->id; ?>" >
+    <div <? if ($this->visible == 0): ?>class="hidden"<? endif; ?>>
+        <? if (strlen($this->pic) > 4): ?>
+            <img src="images/icon/<?= $this->pic; ?>" />
+        <? endif; ?>
+        <? if ($this->isindex == 1): ?>
+            <a title="Главная страница">☆</a>
+        <? endif; ?>
+        <?= $this->escape($this->title); ?>
+
+        <? if (!in_array($this->id, Zend_Registry::get('constants')->admin->deny_delete_pages->toArray())): ?>
+
+            <? if ($this->external_url): ?>
+                <span class="">Внешняя ссылка: <?= $this->escape($this->external_url); ?></span>
+            <? else: ?>
+                <input type="text" value="<?= $this->multilingualUrl(array('module'     => 'pages', 'controller' => 'index', 'action'     => 'index'), 'default'); ?>/<?= $this->url; ?>/" />
+            <? endif; ?>
+
+            <a href="<?= $this->multilingualUrl(array('module'     => 'admin', 'controller' => 'pages', 'action'     => 'delete')); ?>?id=<?= $this->id; ?>" onclick="return confirm('Вы уверены, что хотите удалить страницу?')" class="del">
+                Удалить</a>
+            <a href="<?= $this->multilingualUrl(array('module'     => 'admin', 'controller' => 'pages', 'action'     => 'edit')); ?>?id=<?= $this->id; ?>">Редактировать</a>
+        <? endif; ?>
+
+    </div>

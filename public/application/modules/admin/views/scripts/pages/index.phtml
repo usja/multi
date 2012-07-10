@@ -1,0 +1,85 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+                   
+        $('ul.sortable').nestedSortable({
+            disableNesting: 'no-nest',
+            forcePlaceholderSize: true,
+            handle: 'div',
+            items: 'li',
+            opacity: .6,
+            placeholder: 'placeholder',
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: '> div',
+            'update': function (event, ui) {
+                GG();
+            }
+        });
+        $('#serialize').click(function(e){
+            serialize = $('ul.sortable').nestedSortable('serialize');
+            $('#serializeOutput').text(serialize);
+
+        })
+        $('#toArray').click(function(e){
+            toArray = $('ul.sortable').nestedSortable('toArray', {startDepthCount: 0});
+            toArray = dump(toArray);
+            $('#toArrayOutput').text(toArray);
+        })
+
+    });
+
+    function GG(){
+        serialize = $('ul.sortable').nestedSortable('serialize');
+        document.getElementById('brain-ajax').innerHTML = '<img src="/adm_template/i/ajax-loader.gif" />';
+        $.post
+        (
+        "admin/pages/ajax-change-priority/",
+        {
+            q: serialize
+        },
+        function(data) {
+            document.getElementById('brain-ajax').innerHTML ='&nbsp;';
+        }
+    );
+    }
+
+</script>
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="lefttd">
+            <div id="left-menu">
+                <? Admin_View_Helper_Pages_PagesMenu::MakePagesMenu(); ?>
+            </div>       
+        </td>
+        <td id="righttd">
+            <div id="acontent">
+                <h1>Текстовые страницы</h1>
+                <? if ($this->ok): ?>
+                    <div class="block-ok"><?= $this->ok; ?></div>
+                <? endif; ?>
+
+                <? if ($this->neok): ?>
+                    <div class="block-error"><?= $this->neok; ?></div>
+                <? endif; ?>
+                <div class="add_page"><a href="<?= $this->multilingualUrl(array('module' => 'admin', 'controller' => 'pages', 'action' => 'add')); ?>" class="sbutton">Добавить раздел</a></div>
+                <div id="brain-ajax">&nbsp;</div>
+                <? if (count($this->entries)): ?>
+                    <ul class="sortable" >
+                        <?
+                        $tree_sort = Admin_View_Helper_SelectParentId::VieaPages($this->entries);
+                        ?>
+                    </ul>
+                <? else: ?>
+                    <div class="block-error">
+                        Страниц не найдено
+                    </div>
+                <? endif; ?>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+
+

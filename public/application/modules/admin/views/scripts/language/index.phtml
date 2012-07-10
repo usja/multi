@@ -1,0 +1,101 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('ul.sortable').nestedSortable({
+            disableNesting: 'no-nest',
+            forcePlaceholderSize: true,
+            handle: 'div',
+            items: 'li',
+            opacity: .6,
+            placeholder: 'placeholder',
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: '> div',
+            'update': function (event, ui) {
+                GG();
+            }
+        });
+        $('#serialize').click(function(e){
+            serialize = $('ul.sortable').nestedSortable('serialize');
+            $('#serializeOutput').text(serialize);
+        })
+        $('#toArray').click(function(e){
+            toArray = $('ul.sortable').nestedSortable('toArray', {startDepthCount: 0});
+            toArray = dump(toArray);
+            $('#toArrayOutput').text(toArray);
+        })
+    });
+    function GG(){
+        serialize = $('ul.sortable').nestedSortable('serialize');
+        document.getElementById('brain-ajax').innerHTML = '<img src="/adm_template/i/ajax-loader.gif" />';
+        $.post
+        (
+        "admin/language/ajax-change-priority/",
+        {
+            q: serialize
+        },
+        function(data) {
+            document.getElementById('brain-ajax').innerHTML ='&nbsp;';
+        }
+    );
+    }
+
+</script>
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="lefttd">
+            <div id="left-menu">
+                <? Admin_View_Helper_Configs_ConfigsMenu::MakeConfigsMenu(); ?>
+            </div>       
+        </td>
+        <td id="righttd">
+            <div id="acontent">
+                <h1>Языки системы</h1>
+                <? if ($this->ok): ?>
+                    <div class="block-ok"><?= $this->ok; ?></div>
+                <? endif; ?>
+                <? if ($this->neok): ?>
+                    <div class="block-error"><?= $this->neok; ?></div>
+                <? endif; ?>
+
+                <div class="add_page"><a href="admin/language/add/" class="sbutton">Добавить язык</a></div>
+                <div id="brain-ajax">&nbsp;</div>
+                <? if (count($this->paginator)): ?>
+                    <ul class="sortable">
+                        <? foreach ($this->paginator as $item): ?>
+                            <li id="page_<?= $item->language_id; ?>" class="no-nest">
+                                <div <? if ($item->language_visible == 0): ?>class="hidden"<? endif; ?>>
+
+                                    <? if ($item->language_pic): ?>
+                                        <img src="<?= $this->baseUrl(); ?>/<?= $item->language_pic; ?>" />
+                                    <? endif; ?>
+
+                                    <?= $this->escape($item->language_name); ?>
+                                        [<?=$this->escape($item->language_locale);?>]
+
+                                    <a  class="del"  href="admin/language/delete/?id=<?= $item->language_id; ?>" onclick="return confirm('Вы точно хотите удалить?')">
+                                        Удалить
+                                    </a>  
+                                    <a class="edit" href="admin/language/edit/?id=<?= $item->language_id; ?>">
+                                        Редактировать
+                                    </a>     
+
+                            </li>  
+                        <? endforeach; ?>
+                    </ul>
+
+                <? else: ?>
+                    <div class="block-error">
+                        Производителей не сущействует
+                    </div>
+                <? endif; ?>
+
+
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+

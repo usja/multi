@@ -1,0 +1,73 @@
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="lefttd">
+            <div id="left-menu">
+                <? Admin_View_Helper_Pages_PagesMenu::MakePagesMenu(); ?>
+            </div>       
+        </td>
+        <td id="righttd">
+            <div id="acontent">
+                <? if ($this->ok): ?>
+                    <div class="block-ok"><?= $this->ok; ?></div>
+                <? endif; ?>
+
+                <? if ($this->neok): ?>
+                    <div class="block-error"><?= $this->neok; ?></div>
+                <? endif; ?>
+                <ul id="tabs">
+                    <li title="rus" class="active"><h1>  <? if ($_GET['id'] > 0): ?>Редактирование<? else: ?>Создание нового раздела<? endif; ?></h1></li>
+                </ul>
+
+                <div id="tabs-content-list">
+                    <div class="tabs-item edit-and-add" id="rus">
+                        <form enctype="multipart/form-data" id="<?= $this->form->getId() ?>" method="POST" action="<?= $this->form->getAction() ?>">
+                            <? foreach ($this->form as $element): ?>
+                                <?= $element ?>
+                                <? if ($element->getName() == 'stop'): ?>
+                                    <dt><label>Фон (пропорция 1:2):</label></dt>
+
+                                    <dd>
+                                        <div class="input-image">
+                                            <? if (strlen($this->data->pic) > 4): ?>
+                                                <a href="admin/pages/edit/?id=<?= intval($_GET['id']); ?>&clear=1" class="input-image-delete"></a>
+                                                <img src="images/icon/<?= $this->data->pic; ?>" />
+                                            <? endif; ?>
+                                        </div>
+                                        <div class="ffile">
+                                            <input type="file" name="Filedata" class="bfile" size="2" />
+                                            <a href="#" class="sbutton">Выбрать</a>
+                                        </div>
+                                    </dd>
+                                <? endif; ?>
+                            <? endforeach; ?>
+                            <div class="save_page">
+                                <a href="admin/pages/" class="sbutton">Отмена</a>
+                                <input type="submit" name="#" value="<? if ($_GET['id'] > 0): ?>Сохранить<? else: ?>Создать и добавить<? endif; ?>" class="sbutton" />
+                                <input type="submit" name="back" value="<? if ($_GET['id'] > 0): ?>Сохранить и вернуться<? else: ?>Создать и вернуться<? endif; ?>" class="sbutton" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<?php
+$this->layout()->ckeditor = 'ckeditor';
+?>
+
+<?php echo $this->setupEditor('txt'); ?>
+<? /*
+<script>
+    window.onload = function(){ 
+        hideblock("external_url","txt_form_input");
+    }
+</script>
+ * 
+ */
+?>
+
+
+
+
+

@@ -1,0 +1,22 @@
+<div id="enter">
+    <div id="logo-uds"><a href="http://uds.kiev.ua/"><img src="adm_template/i/logoUDS_.png" width="50" height="21" alt="" /></a> UDS™ CMS v2.0.2</div>
+    <form  method="post" action="admin/login/">
+        <div class="block-error">
+            <? if (!$_GET['s']): ?>
+                Вам нужно войти
+            <? elseif ($_GET['s'] == 'x'): ?>
+                <? $halt = 1; ?>
+                С вашего компьютера было слишком много попыток неудачного входа. <br/>
+                Повторно вы сможете попробовать войти через три часа.
+            <? else: ?>Ошибка логина или пароля<? endif; ?>
+        </div>
+        <? if ($halt != 1): ?>
+            <div><input name="user_login" type="text" id="login" /></div>
+            <div><input name="user_password" type="password" id="pass" /><input type="hidden" name="chok" value="232" /></div>
+            <div><input type="submit" name="#" value="Вход" class="sbutton" /></div>
+        <? endif; ?>
+    </form>
+
+    <div id="copy">&COPY; Ukrainian Design Studio 2009—<?= date('Y'); ?></div>  
+</div>
+

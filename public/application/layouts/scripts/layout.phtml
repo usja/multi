@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <!-- (C) UDS CMS | 2012 | www.uds.kiev.ua -->
+
+        <base href="<?= $this->baseUrl(); ?>/" />
+        <? $base = $this->multilingualUrl(array('module' => 'default'), 'default', true); ?>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echo $this->headTitle(); ?>
+        <?php echo $this->headMeta(); ?>
+        <?php
+        $this->headLink()->appendStylesheet('/css/reset_style.css');
+        $this->headLink()->appendStylesheet('/css/style.css');
+
+        ?>
+        <?php $this->headScript()->captureStart() ?>
+        var lang = "<?= Zend_Registry::get('uds_lang'); ?>";
+        <?php $this->headScript()->captureEnd() ?>
+        <?php
+        $this->headScript()->appendFile('/js/lang_' . Zend_Registry::get('uds_lang') . '.js');
+        $this->headScript()->appendFile('/js/jquery.js');
+        $this->headScript()->appendFile('/js/uds.js');
+        ?>
+
+
+
+        <?php echo $this->magicHeadLink(); ?>
+
+        <?php echo $this->magicHeadScript(); ?>
+
+        <!--[if gt IE 6]><link rel="stylesheet" href="css/ie.css" type="text/css" /><![endif]-->
+        <!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" /><![endif]-->
+
+    </head>
+    <body>
+        <div id="head-top">
+            <div class="in">
+                <span id="head-top-name"><?=$this->translate('State Enterprise of Special Post');?></span>
+                <div id="head-top-lang">
+                    <a href="<?= $this->baseUrl(); ?>/en/" <? if (Zend_Registry::get('uds_lang') == 'en'): ?>class="active"<? endif; ?>>English</a>
+                    <a href="<?= $this->baseUrl(); ?>/" <? if (Zend_Registry::get('uds_lang') == 'ua'): ?>class="active"<? endif; ?>>Українська</a>
+                    <a href="<?= $this->baseUrl(); ?>/ru/" <? if (Zend_Registry::get('uds_lang') == 'ru'): ?>class="active"<? endif; ?>>Русская</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="head">
+            <div class="in">
+                <a href="<?= $base; ?>" id="dpsz-logo">ДПСЗ</a>
+                <div id="head-name">
+                    <?= $this->TopInfo(); ?>
+                </div>
+                <div id="head-tracking">
+                    <a href="<?= $base; ?>" id="ems-logo">EMS</a>
+                    <div class="tracking-form">
+                        <? $url = $this->multilingualUrl(array('module'     => 'tracking', 'controller' => 'ems'), 'defaultMultilingual', false); ?>
+                        <form name="ems_tracking" id="ems_tracking" action="<?= $url; ?>" method="POST">
+                            <input name="uds_ems_tr" type="text" class="input" id="tr-ems" /><div class="button"><input type="submit" name="ems_tr" value="" /></div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="menu">
+            <div class="in">
+                <? echo $this->navigation()->menu()->renderMenu(Zend_Registry::get('mainMenu')); ?>
+            </div>
+        </div>
+        <!-- content block -->
+        <div id="wrap">
+            <div class="in">
+
+                <div id="left-col">
+                    <? echo $this->navigation()->menu()->renderMenuLeft(Zend_Registry::get('leftMenu'), array('ulClass' => 'menu-left')); ?>
+                    <a href="" id="courier">Вызвать курьера</a>
+                    <a href="" id="security_services">Охранные услуги</a>
+
+                    <? $this->getBannersLeft(); ?>
+                </div>
+                <? $this->getBanners(); ?>
+
+                <div id="content-col">
+                    <? $this->getLastNews(); ?>
+                    <?php echo $this->layout()->content ?>
+                    <? $this->getLastNewsBottom(); ?>
+                </div>
+
+
+                <div id="right-col">
+
+                    <div class="name-block">Розрахунок вартості</div>
+
+                    <div id="tabs-name">
+                        <span id="tabs-ems">ЕМС</span>
+                        <span id="tabs-dpsz">Спецзв'язок</span>
+                    </div>
+                    <div id="tabs-in">
+
+                        <!-- EMS -->
+                        <? $this->OnlineEMS();?>
+                        <!-- -->
+
+                        <!-- DPSZ -->
+                        <div class="tabs-in-block" id="tabs-dpsz-in">
+                            <form name="#" action="http://" method="POST">
+
+                                <div class="line-form">
+                                    <span class="line-form-name">Звідки:</span>
+                                    <div class="skinselect">
+                                        <select name="#">
+                                            <option value="0">Україна</option>
+                                            <option value="1">Перелік країн СНГ</option>
+                                        </select>
+                                    </div>
+                                    <div class="skinselect">
+                                        <select name="#">
+                                            <option value="0">Населений пункт</option>
+                                            <option value="1">Шепетівка</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="line-form">
+                                    <span class="line-form-name">Клас доставки:</span>
+                                    <div class="skinselect">
+                                        <select name="#">
+                                            <option value="0">01</option>
+                                            <option value="1">02</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="line-form">
+                                    <span class="line-form-name">Вага (кг):</span>
+                                    <input name="emsweight" type="text" id="ems-weight" />
+                                </div>
+
+                                <div class="line-form">
+                                    <span class="line-form-name">Цінність (грн):</span>
+                                    <input name="#" type="text" id="ems-value" />
+                                </div>
+
+                                <div class="line-form">
+                                    <span class="line-form-name">Додаткові послуги:</span>
+                                    <div class="skinselect" id="ems-service">
+                                        <select name="#">
+                                            <option value="0">01</option>
+                                            <option value="1">02</option>
+                                        </select>
+                                    </div>
+                                    <div id="ems-service-about">
+                                        Приймання відправлень у приміщенні споживача при здійсненні вручення відправлень
+                                    </div>
+                                </div>
+
+                                <div class="line-form">
+                                    <span class="line-form-name">З ПДВ:</span>
+                                    <label><span class="checkbox"><input type="checkbox" name="#" value="1" /></span></label>
+                                </div>
+
+                                <div class="line-form">
+                                    <input type="submit" name="#" value="розрахунок" class="button" />
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <? $this->getBannersRight(); ?>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="in">
+
+                <p>2012  Все права защищены</p>
+                <?= $this->BottomInfo(); ?>
+                <div id="search">
+                    <form name="#" action="http://">
+                        <input name="#" type="text" class="input" />
+                        <div class="button"><input type="submit" name="#" value="" /></div>
+                    </form>
+                </div>
+
+            </div>
+        </div>       
+    </body>
+</html>
